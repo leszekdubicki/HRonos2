@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: 
+  start_date: 2015-08-05
+  end_date: 2015-08-05
+  employee_comments: MyText
+  manager_comments: MyText
+  state: 1
+
+two:
+  employee_id: 
+  start_date: 2015-08-05
+  end_date: 2015-08-05
+  employee_comments: MyText
+  manager_comments: MyText
+  state: 1
