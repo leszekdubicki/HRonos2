@@ -1,10 +1,18 @@
 class VacationsController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_vacation, only: [:show, :edit, :update, :destroy]
 
   # GET /vacations
   # GET /vacations.json
   def index
-    @vacations = Vacation.all
+    #display only vacations for currently logged in user:
+    @employee = Employee.where(user_id: current_user.id)
+    @manager = Employee.where(user_id: current_user.id)
+    if @employee[0]
+        @vacations = Vacation.where(employee_id: @employee[0].id)
+    else
+        @vacations = nil
+    end
   end
 
   # GET /vacations/1
@@ -25,6 +33,8 @@ class VacationsController < ApplicationController
   # POST /vacations.json
   def create
     @vacation = Vacation.new(vacation_params)
+    @employee = Employee.where(user_id: current_user.id)
+    @vacation.employee_id = @employee[0].id
 
     respond_to do |format|
       if @vacation.save

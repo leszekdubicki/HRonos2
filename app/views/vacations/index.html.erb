@@ -2,6 +2,7 @@
 
 <h1>Listing Vacations</h1>
 
+<%if @vacations %>
 <table>
   <thead>
     <tr>
@@ -18,7 +19,7 @@
   <tbody>
     <% @vacations.each do |vacation| %>
       <tr>
-        <td><%= vacation.employee %></td>
+        <td><%= link_to 'Employee', vacation.employee %></td>
         <td><%= vacation.start_date %></td>
         <td><%= vacation.end_date %></td>
         <td><%= vacation.employee_comments %></td>
@@ -31,6 +32,10 @@
     <% end %>
   </tbody>
 </table>
+<%else%>
+    <%#currently logged in user has no vacations to display%>
+    <p> You have no vacations to show </p>
+<%end%>
 
 <br>
 

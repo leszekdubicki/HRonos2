@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802110622) do
+ActiveRecord::Schema.define(version: 20150805160650) do
 
   create_table "employees", force: :cascade do |t|
     t.text     "first_name"
@@ -42,5 +42,18 @@ ActiveRecord::Schema.define(version: 20150802110622) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "vacations", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.text     "employee_comments"
+    t.text     "manager_comments"
+    t.integer  "state"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "vacations", ["employee_id"], name: "index_vacations_on_employee_id"
 
 end
