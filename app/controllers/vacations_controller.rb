@@ -7,13 +7,17 @@ class VacationsController < ApplicationController
   def index
     #display only vacations for currently logged in user:
     @employee = Employee.where(user_id: current_user.id)
-    @manager = Employee.where(user_id: current_user.id)
     if @employee[0]
         @vacations = Vacation.where(employee_id: @employee[0].id)
     else
         @vacations = nil
     end
-  end
+    #listing vacation requests waiting for approval in case logged in user is a manager:
+    @manager = false
+    if Employee.where(user_id: current_user.id)[0].level == 1
+        @manager = true
+        #find all vacations where employee's manager is current user:
+    end
 
   # GET /vacations/1
   # GET /vacations/1.json
@@ -35,10 +39,11 @@ class VacationsController < ApplicationController
     @vacation = Vacation.new(vacation_params)
     @employee = Employee.where(user_id: current_user.id)
     @vacation.employee_id = @employee[0].id
+    @vacation.state = 0
 
     respond_to do |format|
       if @vacation.save
-        format.html { redirect_to @vacation, notice: 'Vacation was successfully created.' }
+        format.html { redirect_to @vacation, notice: 'Vacation request was successfully created.' }
         format.json { render :show, status: :created, location: @vacation }
       else
         format.html { render :new }

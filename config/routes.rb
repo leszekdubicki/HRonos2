@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :employees
   #devise_for :users
   devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
+  match '/users/:id', :to => 'users#show', :as => :user, via: ["get"]
+  resources :users, :only => [:index, :show]
   root 'home#index'
 
   get 'home/index'

@@ -11,7 +11,7 @@
       <th>End date</th>
       <th>Employee comments</th>
       <th>Manager comments</th>
-      <th>State</th>
+      <th>State</th> 
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,7 +24,7 @@
         <td><%= vacation.end_date %></td>
         <td><%= vacation.employee_comments %></td>
         <td><%= vacation.manager_comments %></td>
-        <td><%= vacation.state %></td>
+        <td><%= vacation.state_string %></td>
         <td><%= link_to 'Show', vacation %></td>
         <td><%= link_to 'Edit', edit_vacation_path(vacation) %></td>
         <td><%= link_to 'Destroy', vacation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -36,7 +36,11 @@
     <%#currently logged in user has no vacations to display%>
     <p> You have no vacations to show </p>
 <%end%>
+<%#listing vacations to approve%>
 
+<%if @manager %>
+    
+<%end%>
 <br>
 
 <%= link_to 'New Vacation', new_vacation_path %>
