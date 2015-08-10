@@ -18,7 +18,7 @@ class VacationsController < ApplicationController
         @manager = true
         #find all vacations where employee's manager is current user:
     end
-
+  end
   # GET /vacations/1
   # GET /vacations/1.json
   def show
