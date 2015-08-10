@@ -22,7 +22,19 @@
 
 <p>
   <strong>User:</strong>
-  <%= @employee.user %>
+  <%if @employee.user %>
+    <%= link_to @employee.user.full_name, @employee.user %>
+  <%else%>
+    <p>No User Assigned</p>
+  <%end%>
+</p>
+<p>
+  <strong>Manager:</strong>
+  <%if @employee.manager %>
+    <%= @employee.manager.full_name %>
+  <%else%>
+    <p>No Manager Assigned</p>
+  <%end%>
 </p>
 
 <%= link_to 'Edit', edit_employee_path(@employee) %> |

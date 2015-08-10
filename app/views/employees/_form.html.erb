@@ -29,11 +29,28 @@
   </div>
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+    <%#= f.text_field :user_id #replaced with list of all users%>
+    <% if @users %>
+        <%= f.collection_select :user_id, @users, :id, :full_name, include_blank: true %>
+    <%else%>
+        <p> No users in the System </p>
+    <%end%>
   </div>
   <div class="field">
     <%= f.label :manager_id %><br>
-    <%= f.text_field :manager_id %>
+    <%#<%= f.text_field :manager_id %>
+    <%#replaced by collection_select - list of all managers in the system#%>
+    <% if @managers %>
+        <%= f.collection_select :manager_id, @managers, :id, :full_name, include_blank: true %>
+    <%else%>
+        <p> No managers in the System </p>
+    <%end%>
+  </div>
+  <div class="field">
+    <%= f.label :level %><br>
+    <%#<%= f.text_field :manager_id %>
+    <%#replaced by collection_select - list of all managers in the system#%>
+        <%= f.select :level, [["Standard Employee", 0], ["Manager", 1]] %>
   </div>
   <div class="actions">
     <%= f.submit %>

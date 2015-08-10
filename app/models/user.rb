@@ -6,4 +6,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   accepts_nested_attributes_for :employee
+  def full_name
+    #returns string to be displayed when showing or editing the record (instead of only email)
+    full_name = email
+    if employee
+        full_name = full_name << " (" << employee.full_name << ")"
+    end
+    return full_name
+  end
 end

@@ -29,8 +29,9 @@
         <%else%>
             <td> No user assigned</td>
          <%end%>
-        <% if employee.manager_id %>
-            <td><%= employee.manager_id%></td>
+        <% if employee.manager %>
+            <%#link to manager%>
+            <td><%= link_to employee.manager.first_name  << " "  << employee.manager.last_name, employee.manager%></td>
         <%else%>
             <td> No manager assigned</td>
          <%end%>

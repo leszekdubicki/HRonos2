@@ -14,11 +14,14 @@ class EmployeesController < ApplicationController
 
   # GET /employees/new
   def new
+    @managers = Employee.where(level: 1) #collection of all managers
     @employee = Employee.new
   end
 
   # GET /employees/1/edit
   def edit
+    @managers = Employee.where(level: 1) #collection of all managers
+    @users = User.all
   end
 
   # POST /employees
@@ -69,6 +72,6 @@ class EmployeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:first_name, :last_name, :start_date, :salary, :user_id, :manager_id)
+      params.require(:employee).permit(:first_name, :last_name, :start_date, :salary, :user_id, :level, :manager_id, :manager, :subordinates)
     end
 end
