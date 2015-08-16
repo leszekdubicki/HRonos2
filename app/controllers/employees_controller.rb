@@ -1,6 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!
+  #before_filter :authenticate_user!
+  before_filter :ensure_priviliged!
 
   # GET /employees
   # GET /employees.json
@@ -75,4 +76,13 @@ class EmployeesController < ApplicationController
     def employee_params
       params.require(:employee).permit(:first_name, :last_name, :start_date, :salary, :user_id, :level, :manager_id, :manager, :subordinates)
     end
+    def ensure_priviliged!
+      if not admin_signed_in? and current_user and not current_user.is_manager? 
+        authenticate_admin!
+      elsif not user_signed_in?
+        authenticate_admin!
+        #return false
+      end
+    end
+
 end

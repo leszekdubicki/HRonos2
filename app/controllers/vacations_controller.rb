@@ -4,6 +4,7 @@ class VacationsController < ApplicationController
   #verify what type of user is accessing information :w
   before_action :set_vacation, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  #before_filter :ensure_priviliged!
 
   # GET /vacations
   # GET /vacations.json
@@ -121,6 +122,14 @@ class VacationsController < ApplicationController
         params.require(:vacation).permit(:employee_id, :start_date, :end_date, :employee_comments, :manager_comments, :state)
       else
         params.require(:vacation).permit(:employee_id, :start_date, :end_date, :employee_comments)
+      end
+    end
+    def ensure_priviliged!
+      if not admin_signed_in? and current_user and not current_user.is_manager? 
+        authenticate_admin!
+      elsif not user_signed_in?
+        authenticate_admin!
+        #return false
       end
     end
     def check_who_logged_in!
