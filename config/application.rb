@@ -26,7 +26,7 @@ module HR2
     #custom configuration
     #add initial admin role in case it doesn't exist yet
     config.after_initialize do
-        checkadmin = false
+        checkadmin = true
         if checkadmin
           puts "checking if base admin account exists... (remember to turn off if running rake after changing db setup)"
           @admin = Admin.where(email: "leszek.dubicki@student.ncirl.ie").first
