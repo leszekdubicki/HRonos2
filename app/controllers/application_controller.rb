@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def checkaccounts!
         checkadmin = true
         if checkadmin
-          puts "checking if base admin account exists... (remember to turn off if running rake after changing db setup)"
+          puts "checking if base admin account exists..."
           @admin = Admin.where(email: "leszek.dubicki@student.ncirl.ie").first
           if not @admin
             puts "adding base admin account"
