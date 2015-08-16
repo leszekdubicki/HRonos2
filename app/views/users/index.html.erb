@@ -2,6 +2,7 @@
 
 <h1>Listing Users</h1>
 
+<%if @is_priviliged %>
 <table>
   <thead>
     <tr>
@@ -16,7 +17,11 @@
       <tr>
         <td><%= user.email %></td>
         <% if user.employee %>
-          <td><%= user.employee.full_name %></td>
+          <%if user.employee.full_name.length >0 %>
+            <td><%= link_to user.employee.full_name, user.employee %></td>
+          <%elsif%>
+            <td><%= link_to "Name not set", user.employee %></td>
+          <%end%>
         <% else %>
           <td> No Employee assigned</td>
         <%end%>
@@ -27,7 +32,9 @@
     <% end %>
   </tbody>
 </table>
-
+<%= link_to 'New User', new_user_path %>
+<%else%>
+    <p> You have to be a manager to see users </p>
+<%end%>
 <br>
 
-<%= link_to 'New User', new_user_path %>

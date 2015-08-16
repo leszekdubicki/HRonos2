@@ -31,7 +31,7 @@
 <p>
   <strong>Manager:</strong>
   <%if @employee.manager %>
-    <%= @employee.manager.full_name %>
+    <%= link_to @employee.manager.full_name, @employee.manager %>
   <%else%>
     <p>No Manager Assigned</p>
   <%end%>

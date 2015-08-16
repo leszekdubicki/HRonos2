@@ -1,3 +1,4 @@
 rails g scaffold Vacation employee:references start_date:date end_date:date employee_comments:text manager_comments:text state:integer
 rails g migration add_level_to_employees level:integer
 rails g scaffold_controller User
+rails g scaffold_controller Admin

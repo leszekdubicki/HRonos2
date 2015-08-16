@@ -22,5 +22,16 @@ module HR2
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    #custom configuration
+    #add initial admin role in case it doesn't exist yet
+    config.after_initialize do
+        puts "checking if base admin account exists..."
+        @admin = Admin.where(email: "leszek.dubicki@student.ncirl.ie").first
+        if not @admin
+            puts "adding base admin account"
+            Admin.create!({:email => "leszek.dubicki@student.ncirl.ie", :password => "admin123", :password_confirmation => "admin123" })
+        end
+    end
   end
 end

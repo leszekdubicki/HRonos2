@@ -6,7 +6,7 @@ class Vacation < ActiveRecord::Base
     elsif state == 1
         return "Approved"
     elsif state == 2
-        return "Declined"
+        return "Rejected"
     end
   end
 end

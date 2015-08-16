@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  #devise_for :users
+  #devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
+  devise_for :users, controllers: { sessions: "users/sessions"}
+  devise_for :admins, controllers: { sessions: "admins/sessions" }
   resources :vacations
   resources :employees
-  #devise_for :users
-  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
   #match '/users/:id', :to => 'users#show', :as => :user, via: ["get"]
   #resources :users, :only => [:index, :show]
   resources :users
+  resources :admins
   root 'home#index'
 
   get 'home/index'

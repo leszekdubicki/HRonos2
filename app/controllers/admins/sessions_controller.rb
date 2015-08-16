@@ -1,7 +1,6 @@
-class Users::SessionsController < Devise::SessionsController
+class Admins::SessionsController < Devise::SessionsController
  #before_filter :configure_sign_in_params, only: [:create, :new]
- before_filter :configure_sign_in_params, if: :devise_controller?
- #before_filter :authenticate_admin!, only: [:create, :new]
+ before_filter :configure_sign_in_params
 
   # GET /resource/sign_in
    def new
@@ -24,7 +23,6 @@ class Users::SessionsController < Devise::SessionsController
    def configure_sign_in_params
      #devise_parameter_sanitizer.for(:sign_in) << :employee
      #devise_parameter_sanitizer.for(:sign_up) << :employee
-     #devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, employee_atributes: [:first_name, :last_namem]) }
-     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email) }
+     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, employee_atributes: [:first_name, :last_namem]) }
    end
 end

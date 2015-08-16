@@ -9,10 +9,10 @@ class Employee < ActiveRecord::Base
   accepts_nested_attributes_for :manager
   def full_name
       full_name = ""
-      if :first_name
+      if first_name
           full_name = full_name << first_name
       end
-      if :last_name
+      if last_name
           full_name = full_name << " " << last_name
       end
       return full_name

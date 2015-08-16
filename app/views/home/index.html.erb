@@ -1,4 +1,29 @@
 <h1>Welcome to HRonos</h1>
 
 <%#<p>Find me in app/views/home/index.html.erb</p>%>
-<p><%= link_to 'List your vacations', 'vacations'%></p>
+
+<% if not user_signed_in? %>
+    <p>As it is a HR application allowing users to registering is not a good idea, only admin or manager can create new users</p>
+    <p>For the presentation purpose there are three standard accounts:</p>
+    <ul>
+      <li>Admin account leszek.dubicki@student.ncirl.ie, password: admin123</li>
+      <li>Manager account leszek.dubicki@man.com, password: man123</li>
+      <li>User account leszek.dubicki@emp.com, password: emp123 </li>
+    </ul>
+<% end %>
+
+<%# offer registration for new admin if admin is already signed in %>
+<% if admin_signed_in? %>
+ <%#= link_to 'Register new admin', new_admin_registration_path %>
+ <p><%= link_to 'List administrators', 'admins' %></p>
+ <p><%= link_to 'List users', 'users' %></p>
+ <p><%= link_to 'List employees', 'employees' %></p>
+<% elsif user_signed_in?  and current_user.is_manager?%>
+ <%#list everytging except admins list:%>
+ <p><%= link_to 'List users', 'users' %></p>
+ <p><%= link_to 'List employees', 'employees' %></p>
+ <p><%= link_to 'List vacatoins', 'vacations' %></p>
+<% else %>
+ <%#list only vacations%>
+ <p><%= link_to 'List vacatoins', 'vacations' %></p>
+<% end %>

@@ -19,7 +19,7 @@
   <tbody>
     <% @vacations.each do |vacation| %>
       <tr>
-        <td><%= link_to 'Employee', vacation.employee %></td>
+        <td><%= link_to vacation.employee.full_name, vacation.employee %></td>
         <td><%= vacation.start_date %></td>
         <td><%= vacation.end_date %></td>
         <td><%= vacation.employee_comments %></td>
@@ -39,7 +39,43 @@
 <%#listing vacations to approve%>
 
 <%if @manager %>
-    
+<%if @vacations %>
+  <p> As Manager you have the following vacations to approve: </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Employee comments</th>
+        <th>Your comments as Manager</th>
+        <th>State</th> 
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @subvacations.each do |vacations| %>
+        <% vacations.each do |vacation| %>
+         <tr>
+          <td><%= link_to vacation.employee.full_name, vacation.employee %></td>
+          <td><%= vacation.start_date %></td>
+          <td><%= vacation.end_date %></td>
+          <td><%= vacation.employee_comments %></td>
+          <td><%= vacation.manager_comments %></td>
+          <td><%= vacation.state_string %></td>
+          <td><%= link_to 'Show', vacation %></td>
+          <td><%= link_to 'Edit', edit_vacation_path(vacation) %></td>
+          <td><%= link_to 'Destroy', vacation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%else%>
+    <%#currently logged in manager has no vacations to approve%>
+    <p> You have no vacations to approve </p>
+  <%end%>
 <%end%>
 <br>
 

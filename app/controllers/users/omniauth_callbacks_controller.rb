@@ -5,6 +5,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should also create an action method in this controller like this:
   # def twitter
   # end
+  before_filter :authenticate_admin!
 
   # More info at:
   # https://github.com/plataformatec/devise#omniauth

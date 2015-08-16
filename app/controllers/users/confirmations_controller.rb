@@ -1,4 +1,5 @@
 class Users::ConfirmationsController < Devise::ConfirmationsController
+  before_filter :authenticate_admin!
   # GET /resource/confirmation/new
   # def new
   #   super

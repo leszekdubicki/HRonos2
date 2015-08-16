@@ -1,4 +1,18 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+
+</p>
+<p>
+  <strong>Employee:</strong>
+  <%if @user.employee%>
+    <%= link_to @user.employee.full_name, @user.employee %>
+  <%elsif%>
+    <p>No Employee Assigned</p>
+    <%#= link_to @user.employee.full_name, @user.employee %>
+  <%end%>
+</p>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

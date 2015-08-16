@@ -10,11 +10,13 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :employee_id %><br>
-    <%= f.text_field :employee_id %>
-  </div>
+  <% if @employee %>
+    <p>Editing vacation no <%= @vacation.employee_id %> of <%= @employee.full_name %> </p>
+  <%else%>
+    <div class="field">
+      <%= f.text_field :employee_id %>
+    </div>
+  <%end%>
   <div class="field">
     <%= f.label :start_date %><br>
     <%= f.date_select :start_date %>
@@ -29,11 +31,21 @@
   </div>
   <div class="field">
     <%= f.label :manager_comments %><br>
-    <%= f.text_area :manager_comments %>
+    <%if @is_priviliged%>
+      <%= f.text_area :manager_comments %>
+    <%else%>
+      <%= @vacation.manager_comments%>
+    <%end%>
   </div>
   <div class="field">
     <%= f.label :state %><br>
-    <%= f.number_field :state %>
+    <%#allow editing only for priviliged users (it's already taken care in controller, just for consistency%>
+    <%if @is_priviliged%>
+      <%#= f.number_field :state %>
+      <%= f.select :state, [["Waiting for approval", 0], ["Approved", 1], ["Rejected", 2]] %>
+    <%else%>
+      <%= @vacation.state_string%>
+    <%end%>
   </div>
   <div class="actions">
     <%= f.submit %>
